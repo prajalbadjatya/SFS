@@ -1,0 +1,18 @@
+<%- include ("partials/header") %>
+<%- include ("partials/navbar") %>
+
+      
+   
+
+
+   
+         
+  <h1>Student dashboard</h1>
+  <h3>This is where the student will see all the available forms to fill</h3>
+  <h2>Hello <%=user.rollno%></h2>
+  
+
+  <% if(feedbackforms.length!=0){ %>
+  <% var len = feedbackforms.length %>
+    <h2>There are total <%=len%> feedback forms available to fill</h2>
+  <% } %>

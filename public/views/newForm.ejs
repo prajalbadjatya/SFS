@@ -1,0 +1,65 @@
+<%- include ("partials/header") %>
+
+<div class="mainContainer2">
+    <nav class="navbar navbar-light bg-light loginNavbar">
+        <a class="navbar-brand navTop">
+            <img src="images/logo1.png" class="navLogo d-inline-block align-top" alt="">
+            <span class="navbarTitle">Feedback System</span>
+        </a>
+    </nav>
+
+
+
+    <div class = "errors">
+       
+
+        <% if(success_msg.length !=0 ){ %>
+            <div class="animated fadeOut message">
+                <% console.log(success_msg); %>
+                <%= success_msg %>
+            </div>
+        <% } %>
+
+        <% if(error_msg.length!=0){ %>
+            <div class="alert alert-success animated fadeOut message2 alert-dismissable">
+                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+
+                <%= error_msg[0] %>
+                <% console.log(error_msg); %>
+            </div>
+        <% } %>
+
+        <% if(error.length!=0){ %>
+            <div class="alert alert-danger animated fadeOut message2 alert-dismissable">
+                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+
+                <%= error %>
+                <% console.log(error); %>
+            </div>
+        <% } %>
+
+    </div>
+    
+    
+
+    <div class="loginContainer">
+        <form action="/createnewform" method="post">
+            <span class="loginHeading">Create New Feedback Form</span>
+            
+            <h4 class = "form1">Please enter the branch and year of study for which you want to create feedback form.</h4>
+            
+            <div class="registerDiv">
+                <div class="form-group emailForm">
+                <label for="exampleInputEmail1" class="label">Branch</label>
+                <input type="text" class="form-control" id="exampleInputEmail1" name="branch" aria-describedby="emailHelp" placeholder="Enter branch">
+                </div>
+                <div class="form-group">
+                <label for="exampleInputPassword1" class="label">Year</label>
+                <input type="text" class="form-control" id="exampleInputPassword1" name="year" placeholder="Year of study">
+                </div>
+                <button type="submit" id="SubmitBtn" class="btn btn-success">Submit</button>
+            </div>
+        </form>
+    </div>
+
+</div>
