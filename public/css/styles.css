@@ -268,7 +268,7 @@ hr{
 
 .mainContainer2,.mainContainer3{
     width: 100vw;
-    height: 100vh;
+    height: 120vh;
     /* background-image: url('../images/loginBackground.jpg'); */
     background-image: url('../images/backForgot.PNG');
     background-repeat: no-repeat;
@@ -320,6 +320,7 @@ hr{
 .loginContainer2:hover{
     box-shadow: 2px 2px 23px 5px #474544;
 }
+
 
 
 .forgotPassContainer{

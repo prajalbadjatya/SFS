@@ -1,18 +1,45 @@
 <%- include ("partials/header") %>
 <%- include ("partials/navbar") %>
 
-      
+
+<div class="mainContainer2">
+    <!-- <nav class="navbar navbar-light bg-light loginNavbar">
+        <a class="navbar-brand navTop">
+            <img src="images/logo1.png" class="navLogo d-inline-block align-top" alt="">
+            <span class="navbarTitle">Student Feedback System</span>
+        </a>
+    </nav> -->
    
 
+    <div class="loginContainer2">
+
+            <h1>Student Dashboard</h1>
+
+                    
+            <h5><%=user.email%></h5>
+            
+
+            <% if(feedbackforms.length!=0){ %>
+            <% var len = feedbackforms.length %>
+              <h5>There are total <%=len%> feedback forms available to fill</h5>
+            <% for(var i=0; i<feedbackforms.length; i++){ %>
+              <a href="/fill/<%=feedbackforms[i]._id%>"> <button type="submit" id="SubmitBtn2" class="btn btn-info">Feedback Form <%=i+1%> <br> <h5>Created by <%=feedbackforms[i].username%></h5></button> </a> <br>
+              
+            <% } %>
+            <% }else{ %>
+              <h2>Oops! There is no feedback form available for you!</h2>
+            <% } %>
+
+            
+            
+    </div>
+
+    
+</div>
+ 
+
+
+
 
    
-         
-  <h1>Student dashboard</h1>
-  <h3>This is where the student will see all the available forms to fill</h3>
-  <h2>Hello <%=user.rollno%></h2>
-  
-
-  <% if(feedbackforms.length!=0){ %>
-  <% var len = feedbackforms.length %>
-    <h2>There are total <%=len%> feedback forms available to fill</h2>
-  <% } %>
+ 

@@ -30,7 +30,7 @@ var {Feedback} = require('./models/feedback.js');
 //Connect to DB
 const connectDB = async () => {
     try {
-        const conn = await mongoose.connect(`${process.env.MONGO_URI}` , {
+        const conn = await mongoose.connect('mongodb://127.0.0.1:27017/SFS' , {
         useNewUrlParser:true,
         useCreateIndex:true,
         useFindAndModify:true, 
@@ -104,9 +104,10 @@ app.get('/feedback',ensureAuth,async(req,res)=>{
     //console.log(req.user);
 
     const userDetails = req.user;
-    console.log(userDetails);
+    // console.log(userDetails);
     try{
         const form = await Feedback.find({branch:'CSE'});
+        // console.log(form);
         res.render('feedback',{feedbackforms:form, user: userDetails} ); 
     }catch(err){
         res.json(err);
@@ -392,6 +393,32 @@ app.post('/feedback',ensureAuth,(req,res)=>{
      
  });
 
+app.get('/fill/:id', (req,res)=>{
+    var id = req.params.id;
+    res.render('Form', {id: id});
+})
+
+//Route for submitting the feedback
+app.post('/fill/:id', async(req,res)=> {
+    var body = _.pick(req.body,['ans1','ans2','ans3','ans4','ans5']);
+    console.log(body);
+
+    try {
+        const id = req.params.id;
+        const form = await Feedback.find({_id:id});
+
+        console.log(form[0]);
+        
+        form.responses.unshift(body);
+        await form.save();
+
+        res.json(form.responses);
+    } catch (err) {
+        res.send(err);
+    }
+
+
+})
 
 
 
