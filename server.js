@@ -398,21 +398,31 @@ app.get('/fill/:id', (req,res)=>{
     res.render('Form', {id: id});
 })
 
+
 //Route for submitting the feedback
 app.post('/fill/:id', async(req,res)=> {
-    var body = _.pick(req.body,['ans1','ans2','ans3','ans4','ans5']);
-    console.log(body);
-
+    var{question1, question2, question3, question4, question5} = req.body;
+    
     try {
         const id = req.params.id;
-        const form = await Feedback.find({_id:id});
+        const form = await Feedback.findOne({_id:id});
+        const rollno = req.user.rollno;
 
-        console.log(form[0]);
+        const newFeedbackResponse = {
+            rollno,
+            question1,
+            question2,
+            question3,
+            question4,
+            question5
+        }
+
         
-        form.responses.unshift(body);
+        form.responses.unshift(newFeedbackResponse);
         await form.save();
 
-        res.json(form.responses);
+        req.flash('success_msg', 'Feedback saved successfully');
+        res.redirect('/feedback');
     } catch (err) {
         res.send(err);
     }
@@ -475,6 +485,23 @@ app.post('/createnewform',[
         })
        
     }
+});
+
+
+//Route to view filled feedback forms
+app.get('/view',async(req,res)=>{
+  
+    const userDetails = req.user;
+    console.log(userDetails);
+    const id = userDetails._id;
+    try{
+        const form = await Feedback.find({username: id});
+        console.log(form);
+        res.render('viewFilled',{feedbackforms:form, user: userDetails} ); 
+    }catch(err){
+        res.json(err);
+    }
+   
 });
 
 

@@ -449,6 +449,16 @@ hr{
 
 
 
+#SubmitBtn3{
+    width: 100%;
+    height: auto;
+    margin-top: 10px;
+}
+#SubmitBtn3:hover{
+    background: rgba(0,0,0,.5);
+}
+
+
 .radioButton{
     width: 50%;
     margin-left: 4vw;
@@ -563,11 +573,6 @@ hr{
     font-size: 20px;
     padding-top: 2px;
 }
-
-
-
-
-
 
 
 
