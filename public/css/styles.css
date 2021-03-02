@@ -574,7 +574,11 @@ hr{
     padding-top: 2px;
 }
 
+.abcde{
+    text-align: center;
+}
 
-
-
-
+.card-header{
+    align-items: center;
+    text-align: center;
+}

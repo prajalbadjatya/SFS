@@ -106,8 +106,8 @@ app.get('/feedback',ensureAuth,async(req,res)=>{
     const userDetails = req.user;
     // console.log(userDetails);
     try{
-        const form = await Feedback.find({branch:'CSE'});
-        // console.log(form);
+        const form = await Feedback.find({branch:userDetails.branch, year: userDetails.year});
+        console.log(form);
         res.render('feedback',{feedbackforms:form, user: userDetails} ); 
     }catch(err){
         res.json(err);
@@ -450,7 +450,7 @@ app.get('/createnewform', (req,res)=>{
 app.post('/createnewform',[
   
     check('branch', 'Branch must be CSE')
-      .isIn(['CSE']).withMessage('Min length for Password is 5'),
+      .isIn(['CSE', 'EI', 'EC']).withMessage('This Branch does not exist'),
     
     check('year').isIn(['1','2','3','4']).withMessage('Year must be 1 2 3 or 4')
         
@@ -504,6 +504,20 @@ app.get('/view',async(req,res)=>{
    
 });
 
+
+//Route to view responses of a feedback form with an id
+app.get('/viewresponses/:id', async(req,res)=>{
+    
+    try {
+        //This id is username in Feedback Schema 
+        const id = req.params.id;
+        const form = await Feedback.findOne({_id:id});
+        console.log(form);
+        res.render('viewResponses', {user: form._id, responseArray : form.responses, form:form});
+    }catch(err){
+        res.json(err);
+    }
+});
 
 
 server.listen(port, ()=> {
