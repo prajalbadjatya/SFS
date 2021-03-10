@@ -39,11 +39,20 @@
 
                     
             <h5><%=user.email%></h5>
+
+            <% var count = 0 %>
+            <% for(var i=0; i<feedbackforms.length; i++){ %>
+            <% if(feedbackforms[i].responses.length !=0){ %>
+            <% count++ %>
+            <% } %>
+            <% } %>
+
+
             
 
             <% if(feedbackforms.length!=0){ %>
             <% var len = feedbackforms.length %>
-              <h5>There are total <%=len%> feedback forms which have received responses</h5><br>
+              <h5>You have created <%=len%> feedback forms out of which <%=count%> have received responses</h5><br>
             <% for(var i=0; i<feedbackforms.length; i++){ %>
               <a href="/viewresponses/<%=feedbackforms[i]._id%>"> 
                 <button type="submit" id="SubmitBtn3" class="btn btn-info"><h3>Feedback Form <%=i+1%></h3>  Branch : <%=feedbackforms[i].branch%>  <h5>Year : <%=feedbackforms[i].year%> </h5> Number of responses: <%=feedbackforms[i].responses.length%></button>

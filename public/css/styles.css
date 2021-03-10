@@ -284,7 +284,11 @@ hr{
 }
 
 .mainContainer3{
-    height: 100vh;
+    width: 100vw;
+    height: 120vh;
+    background-image: url('../images/backForgot.PNG');
+    background-repeat: no-repeat;
+    background-size: cover;
 }
 
 .loginContainer,.profileContainer,.changePassContainer{

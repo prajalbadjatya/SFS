@@ -1,5 +1,6 @@
 <%- include ("partials/header") %>
 
+
 <nav class="navbar navbar-light bg-light">
     <a class="navbar-brand navTop">
     <img src="/images/logo1.png" class="navLogo d-inline-block align-top" alt="">
@@ -8,10 +9,16 @@
     <form action="/logOut" method="post">
         <button type="submit" class="logoutBtn btn btn-outline-success">Logout</button>
     </form>
-</nav>
+</nav> 
+
 
 
 <div class = "abcde">
+
+  <% if(responseArray.length == 0){ %>
+    <br><br><h3>No one has responded to this form yet!</h3>
+
+  <% }else{ %>
   <br>
     <h3>Responses</h3>
     <h6>Branch : <%=form.branch%></h6>
@@ -136,8 +143,12 @@
     <br><br>
 <% } %>
 
+<%}%>
+
 
 </div>
+
+
 
 
 
