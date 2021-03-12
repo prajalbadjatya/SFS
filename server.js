@@ -296,8 +296,8 @@ app.post('/login',
             res.redirect('/login1');
             return;
         }
-
-        res.render('adminDashboard')
+        var email = req.body.email;
+        res.render('adminDashboard');
     }
 });
 
@@ -436,7 +436,9 @@ app.post('/fill/:id', async(req,res)=> {
 
 
 app.get('/adminFeedback', (req,res)=> {
-    res.render('adminDashboard');
+    const userDetails = req.user;
+    console.log(userDetails);
+    res.render('adminDashboard', {user: userDetails});
 })
 
 
@@ -519,6 +521,26 @@ app.get('/viewresponses/:id', async(req,res)=>{
     }
 });
 
+
+//Route to delete a feedback form
+//Now a get route later will change to delete while refactoring
+app.get('/deleteform/:id', async(req,res)=>{
+    try {
+        const id = req.params.id;
+        const form = await Feedback.findOne({_id:id});
+        if(!form){
+            return res.status(400).json({
+                msg: "Feedback form don't exist"
+            })
+        }
+        console.log('deleted');
+        form.remove();
+        res.redirect("/view");
+    } catch (err) {
+        console.log(err);
+        res.send(err);
+    }
+})
 
 
 server.listen(port, ()=> {

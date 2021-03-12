@@ -1,48 +1,8 @@
-<%- include ("partials/header") %>
+<%- include ("partials/newheader") %>
+<%- include ("partials/navbar") %>
 
 <div class="mainContainer2">
-    <nav class="navbar navbar-light bg-light loginNavbar">
-        <a class="navbar-brand navTop">
-            <img src="images/logo1.png" class="navLogo d-inline-block align-top" alt="">
-            <span class="navbarTitle">Feedback System</span>
-        </a>
-    </nav>
-
-
-
-    <div class = "errors">
-       
-
-        <% if(success_msg.length !=0 ){ %>
-            <div class="animated fadeOut message">
-                <% console.log(success_msg); %>
-                <%= success_msg %>
-            </div>
-        <% } %>
-
-        <% if(error_msg.length!=0){ %>
-            <div class="alert alert-success animated fadeOut message2 alert-dismissable">
-                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-
-                <%= error_msg[0] %>
-                <% console.log(error_msg); %>
-            </div>
-        <% } %>
-
-        <% if(error.length!=0){ %>
-            <div class="alert alert-danger animated fadeOut message2 alert-dismissable">
-                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-
-                <%= error %>
-                <% console.log(error); %>
-            </div>
-        <% } %>
-
-    </div>
-    
-    
-
-    <div class="loginContainer">
+    <div class="loginContainer2">
         <form action="/createnewform" method="post">
             <span class="loginHeading">Create New Feedback Form</span>
             
@@ -66,22 +26,79 @@
                 </select>
                 </div>
 
-
-
+                <div class="form-group">
+                    <label for="exampleInputPassword1" class="label">Year</label>
+                    <select class="form-select form-control" aria-label="Default select example" name = "year">
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                    </select>
+                </div>
 
                 <div class="form-group">
-                <label for="exampleInputPassword1" class="label">Year</label>
-                <!-- <input type="text" class="form-control" id="exampleInputPassword1" name="year" placeholder="Year of study"> -->
-                <select class="form-select form-control" aria-label="Default select example" name = "year">
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                    <option value="4">4</option>
-                </select>
+                    <label for="exampleInputPassword1" class="label">Question 1</label>
+                    <input type="text" class="form-control" id="exampleInputPassword1" name="question1" placeholder="Add Question" required>
+                    
                 </div>
+
+                <div class="form-group" id="q2">
+                    <label for="exampleInputPassword1" class="label" >Question 2</label>
+                    <input type="text" class="form-control" id="exampleInputPassword1" name="question2" placeholder="Add Question" value = "">
+                    
+                </div>
+
+                <div class="form-group" id="q3">
+                    <label for="exampleInputPassword1" class="label" >Question 3</label>
+                    <input type="text" class="form-control" id="exampleInputPassword1 q3" name="question3" placeholder="Add Question" value = "">
+                    
+                </div>
+
+                <div class="form-group" id="q4">
+                    <label for="exampleInputPassword1" class="label" >Question 4</label>
+                    <input type="text" class="form-control" id="exampleInputPassword1 q4" name="question4" placeholder="Add Question" value = "">
+                    
+                </div>
+
+                <div class="form-group" id="q5">
+                    <label for="exampleInputPassword1" class="label" >Question 5</label>
+                    <input type="text" class="form-control" id="exampleInputPassword1 q5" name="question5" placeholder="Add Question" value = "">
+                    
+                </div>
+
+
+                <button type = "button" id = "SubmitBtn" class= "btn btn-info">Add more +</button> <br><br>
                 <button type="submit" id="SubmitBtn" class="btn btn-success">Submit</button>
             </div>
         </form>
     </div>
 
 </div>
+
+<script>
+    var ct = 2;
+    var x2 = document.getElementById("q2");
+    var x3 = document.getElementById("q3");
+    var x4 = document.getElementById("q4");
+    var x5 = document.getElementById("q5");
+
+    var btn = document.getElementsByClassName("btn-info");
+    btn[0].addEventListener("click", ()=>{
+        if(ct == 2){
+            x2.setAttribute("id", "exampleInputPassword1")
+        }
+        else if(ct == 3){
+            x3.setAttribute("id", "exampleInputPassword1")
+        }
+        else if(ct==4){
+            x4.setAttribute("id","exampleInputPassword1")
+        }
+        else{
+            x5.setAttribute("id","exampleInputPassword1")
+            btn[0].setAttribute("id", "q2")
+        }
+        ct++;
+    });
+</script>
+      
+<%- include ("partials/footer") %>

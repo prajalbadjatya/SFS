@@ -55,7 +55,11 @@
               <h5>You have created <%=len%> feedback forms out of which <%=count%> have received responses</h5><br>
             <% for(var i=0; i<feedbackforms.length; i++){ %>
               <a href="/viewresponses/<%=feedbackforms[i]._id%>"> 
-                <button type="submit" id="SubmitBtn3" class="btn btn-info"><h3>Feedback Form <%=i+1%></h3>  Branch : <%=feedbackforms[i].branch%>  <h5>Year : <%=feedbackforms[i].year%> </h5> Number of responses: <%=feedbackforms[i].responses.length%></button>
+                <button type="submit" id="SubmitBtn3" class="btn btn-info">
+                  <h3>Feedback Form <%=i+1%></h3>
+                  Branch : <%=feedbackforms[i].branch%>  
+                  <h5>Year : <%=feedbackforms[i].year%> </h5>
+                  Number of responses: <%=feedbackforms[i].responses.length%></button>
               </a> 
               
               <br><br>

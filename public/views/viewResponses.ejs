@@ -13,10 +13,14 @@
 
 
 
+
+
+
 <div class = "abcde">
 
   <% if(responseArray.length == 0){ %>
-    <br><br><h3>No one has responded to this form yet!</h3>
+    <br><br><h3>No one has responded to this form yet!</h3><br>
+    <a href="/deleteform/<%=form._id%>"><button class="btn btn-danger">Delete this Feedback Form</button></a>
 
   <% }else{ %>
   <br>
@@ -24,11 +28,12 @@
     <h6>Branch : <%=form.branch%></h6>
     <h6>Year : <%=form.year%></h6> <br>
     <button class="btn btn-success">View Summary and Visual Representation of responses</button>
+    <br><br>
+    <a href="/deleteform/<%=form._id%>"><button class="btn btn-danger">Delete this Feedback Form</button></a>
+
     <br>
     
   <br>
-
-
 
 
 <div id="accordion">

@@ -586,3 +586,7 @@ hr{
     align-items: center;
     text-align: center;
 }
+
+#q2, #q3, #q4, #q5{
+    display: none;
+}
