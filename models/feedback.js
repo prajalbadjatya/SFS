@@ -29,28 +29,27 @@ var FeedbackSchema = new mongoose.Schema({
         type: Date,
         default: Date.now
     },
-    responses: [
+    questions : [
         {
-            rollno:{
-                type: Number,
-                minlength: 10,
-                trim: true
-            },
-            question1 :{
+        question :{
+            text:{
                 type: String,
+                required:true
             },
-            question2 :{
-                type: String,
-            },
-            question3 :{
-                type: String,
-            },
-            question4 :{
-                type: String,
-            },
-            question5 :{
-                type: String,
-            }
+            responses:[
+                {
+                    rollno:{
+                        type:Number,
+                        minlength:5,
+                        trim:true
+                    },
+                    ans:{
+                        type: String
+                    }
+                }
+
+            ]
+        }
         }
     ]
 });

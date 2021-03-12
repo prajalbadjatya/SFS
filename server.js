@@ -471,11 +471,27 @@ app.post('/createnewform',[
         //username is the id
         const username = req.session.passport.user;
         console.log(username);
+        var {question1, question2, question3, question4, question5} = req.body;
+        var questions = [question1, question2, question3, question4, question5];
+        var questionArray = [];
+        // var questionArray = [ {question:{text:question1}}, {question:{text:question1}} , {question:{text:question1}} , {question:{text:question1}}, {question:{text:question1}} ];
+
+        for(var x in questions){
+            if(questions[x] != ""){
+                questionArray.push({
+                    question:{
+                        text:questions[x]
+                    }
+                })
+            }
+        }
+
 
         const newFeedbackForm = new Feedback({
             username: username, 
             branch: req.body.branch,
-            year: req.body.year
+            year: req.body.year,
+            questions: questionArray
         });
         
         newFeedbackForm.save().then((feedback)=> {
