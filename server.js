@@ -478,7 +478,7 @@ app.post('/createnewform',[
         
         newFeedbackForm.save().then((feedback)=> {
             req.flash('success_msg', 'Feedback form created successfully');
-            res.send('Feedback form created successfully');
+            res.render('adminDashboard');
         }).catch((e)=>{
             console.log(e);
             res.send('There was an error while creating new feedback form');
