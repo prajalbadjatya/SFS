@@ -393,37 +393,76 @@ app.post('/feedback',ensureAuth,(req,res)=>{
      
  });
 
-app.get('/fill/:id', (req,res)=>{
-    var id = req.params.id;
-    res.render('Form', {id: id});
+app.get('/fill/:id',async(req,res)=>{
+    try{
+        var id  = req.params.id;
+        const form  = await Feedback.findOne({_id:id});
+        console.log(form);
+        res.render('Form', {id:id, questionArray:form.questions, date:form.date})
+    }catch(err){
+        console.log(err);
+        res.send(err);
+    }
+    // var id = req.params.id;
+    // res.render('Form', {id: id});
 })
 
 
 //Route for submitting the feedback
 app.post('/fill/:id', async(req,res)=> {
-    var{question1, question2, question3, question4, question5} = req.body;
+    // var{question1, question2, question3, question4, question5} = req.body;
     
     try {
         const id = req.params.id;
         const form = await Feedback.findOne({_id:id});
         const rollno = req.user.rollno;
-
-        const newFeedbackResponse = {
-            rollno,
-            question1,
-            question2,
-            question3,
-            question4,
-            question5
-        }
-
         
-        form.responses.unshift(newFeedbackResponse);
-        await form.save();
+        // console.log(form);
+        var noOfquestions = form.questions.length;
 
+        for(var i=0; i<noOfquestions; i++)
+        {
+            var ans;
+            if(i==0){
+                ans = req.body.question1;
+            }else if(i==1){
+                ans = req.body.question2;
+            }else if(i==2){
+                ans = req.body.question3;
+            }else if(i==3){
+                ans = req.body.question4;
+            }else{
+                ans = req.body.question5;
+            }
+            // console.log(ans);
+            form.questions[i].question.responses.unshift({
+                rollno,
+                ans
+            })
+            
+        }
+        await form.save();
         req.flash('success_msg', 'Feedback saved successfully');
         res.redirect('/feedback');
+        
+
+        // const newFeedbackResponse = {
+        //     rollno,
+        //     question1,
+        //     question2,
+        //     question3,
+        //     question4,
+        //     question5
+        // }
+
+        
+        // form.responses.unshift(newFeedbackResponse);
+        // await form.save();
+
+        // req.flash('success_msg', 'Feedback saved successfully');
+        // res.redirect('/feedback');
     } catch (err) {
+        console.log(err);
         res.send(err);
     }
 

@@ -1,80 +1,70 @@
 <%- include ("partials/header") %>
 <%- include ("partials/navbar") %>
 
-
 <div class="mainContainer2">
-    
-
-
     <div class = "errors">
-       
-
       <% if(success_msg.length !=0 ){ %>
           <div class="animated fadeOut message">
               <% console.log(success_msg); %>
               <%= success_msg %>
           </div>
       <% } %>
-
       <% if(error_msg.length!=0){ %>
           <div class="animated fadeOut message">
               <%= error_msg[0] %>
               <% console.log(error_msg); %>
           </div>
       <% } %>
-
       <% if(error.length!=0){ %>
           <div class="animated fadeOut message">
               <%= error %>
               <% console.log(error); %>
           </div>
       <% } %>
-
-  </div>
-   
+    </div>
 
     <div class="loginContainer2">
 
             <h1>Filled Feedback Forms</h1>
-
-                    
             <h5><%=user.email%></h5>
 
-            <% var count = 0 %>
-            <% for(var i=0; i<feedbackforms.length; i++){ %>
-            <% if(feedbackforms[i].responses.length !=0){ %>
-            <% count++ %>
+            <!-- ct is the number of feedback forms created by user -->
+            <!-- ctt is the number of feedback forms which have received responses -->
+            <% var ct = feedbackforms.length %>
+
+            <% var ctt=0%>
+            <% for(var i=0; i<ct; i++){ %>
+            <% if(feedbackforms[i].questions[0].question.responses.length!=0){%>
+            <% ctt++ }%>
             <% } %>
-            <% } %>
 
-
-            
-
-            <% if(feedbackforms.length!=0){ %>
-            <% var len = feedbackforms.length %>
-              <h5>You have created <%=len%> feedback forms out of which <%=count%> have received responses</h5><br>
-            <% for(var i=0; i<feedbackforms.length; i++){ %>
-              <a href="/viewresponses/<%=feedbackforms[i]._id%>"> 
-                <button type="submit" id="SubmitBtn3" class="btn btn-info">
-                  <h3>Feedback Form <%=i+1%></h3>
-                  Branch : <%=feedbackforms[i].branch%>  
-                  <h5>Year : <%=feedbackforms[i].year%> </h5>
-                  Number of responses: <%=feedbackforms[i].responses.length%></button>
-              </a> 
+            <% if(ct!=0){ %>
               
-              <br><br>
-              
-            <% } %>
+              <h5>You have created <%=ct%> feedback forms out of which <%=ctt%> have received responses</h5><br>
+              <% for(var i=0; i<ct; i++){ %>
+                <a href="/viewresponses/<%=feedbackforms[i]._id%>"> 
+                  <button type="submit" id="SubmitBtn3" class="btn btn-info">
+                    <h3>Feedback Form <%=i+1%></h3>
+                    Branch : <%=feedbackforms[i].branch%>  
+                    <h5>Year : <%=feedbackforms[i].year%> </h5>
+                    Number of responses: <%=feedbackforms[i].questions[0].question.responses.length%></button>
+                  </button>
+                </a> 
+                
+                <br><br>
+                
+              <% } %>
+
+
+
             <% }else{ %>
               <h2>You have not created a feedback form yet!</h2>
             <% } %>
-
+                   
+ 
             
-            
-    </div>
-
-    
-</div>
+    </div>    
+  </div>
  
 
 
