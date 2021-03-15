@@ -1,6 +1,4 @@
 <%- include ("partials/header") %>
-
-
 <nav class="navbar navbar-light bg-light">
     <a class="navbar-brand navTop">
     <img src="/images/logo1.png" class="navLogo d-inline-block align-top" alt="">
@@ -12,13 +10,9 @@
 </nav> 
 
 
-
-
-
-
 <div class = "abcde">
 
-  <% if(responseArray.length == 0){ %>
+  <% if(questions[0].question.responses.length == 0){ %>
     <br><br><h3>No one has responded to this form yet!</h3><br>
     <a href="/deleteform/<%=form._id%>"><button class="btn btn-danger">Delete this Feedback Form</button></a>
 
@@ -26,129 +20,77 @@
   <br>
     <h3>Responses</h3>
     <h6>Branch : <%=form.branch%></h6>
-    <h6>Year : <%=form.year%></h6> <br>
+    <h6>Year : <%=form.year%></h6> 
+    <h6>Created on <%=form.date%></h6> <br>
     <button class="btn btn-success">View Summary and Visual Representation of responses</button>
     <br><br>
-    <a href="/deleteform/<%=form._id%>"><button class="btn btn-danger">Delete this Feedback Form</button></a>
+    <a href="/deleteform/<%=form._id%>"><button class="btn btn-danger">Delete this Feedback Form</button></a> <br><br>
+    <h6>View all the responses of a particular question by clicking on it</h6>
+
+        
+
+    <% for(var i=0; i<questions.length; i++){ %>
+      
+        <!-- Button trigger modal -->
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalLong">
+        <%=questions[i].question.text%>
+        </button>
+
+        <!-- Modal -->
+        <div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle"><%=questions[i].question.text%></h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+              <% for(var j=0; j<questions[i].question.responses.length; j++){ %>
+                    <h5><%=questions[i].question.responses[j].ans%></h5>
+                    <br>
+              <% }  %>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              </div>
+            </div>
+          </div>
+        </div>
+<br><br>
+    <% } %>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <% for(var i=0; i<questions[0].question.responses.length ; i++){ %>
+      <% for(var j=0; j<questions.length; j++){ %>
+          <h5><%=questions[j].question.responses[i].ans%></h5>
+      <% } %>
+    <% } %>
+
 
     <br>
     
   <br>
-
-
-<div id="accordion">
-    <div class="card">
-      <div class="card-header" id="headingOne">
-        <h5 class="mb-0">
-          <button class="btn btn-info " data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
-            View all responses for Question 1
-          </button>
-        </h5>
-      </div>
-  
-      <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
-        <div class="card-body abcde ">
-            <% for(var i=0; i<responseArray.length; i++){ %>
-
-                <h5><%=responseArray[i].question1%></h5>
-            
-            <% } %>
-        </div>
-      </div>
-    </div>
-    <div class="card">
-      <div class="card-header" id="headingTwo">
-        <h5 class="mb-0">
-          <button class="btn btn-info collapsed" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-            View all responses for Question 2
-          </button>
-        </h5>
-      </div>
-      <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
-        <div class="card-body abcde">
-            <% for(var i=0; i<responseArray.length; i++){ %>
-
-               <h5><%=responseArray[i].question2%></h5>
-            
-            <% } %>
-        </div>
-      </div>
-    </div>
-    <div class="card">
-      <div class="card-header" id="headingThree">
-        <h5 class="mb-0">
-          <button class="btn btn-info collapsed" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-            View all responses for Question 3
-          </button>
-        </h5>
-      </div>
-      <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
-        <div class="card-body abcde">
-          <% for(var i=0; i<responseArray.length; i++){ %>
-
-            <h5><%=responseArray[i].question3%></h5>
-        
-        <% } %>
-        </div>
-      </div>
-    </div>
-
-
-
-    <div class="card">
-        <div class="card-header" id="headingFour">
-          <h5 class="mb-0">
-            <button class="btn btn-info collapsed" data-toggle="collapse" data-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
-              View all responses for Question 4
-            </button>
-          </h5>
-        </div>
-        <div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-parent="#accordion">
-          <div class="card-body abcde">
-            
-            <% for(var i=0; i<responseArray.length; i++){ %>
-
-              <h5><%=responseArray[i].question4%></h5>
-          
-          <% } %>
-          </div>
-        </div>
-      </div>
-  </div>
-
-
-  <div class="card">
-    <div class="card-header" id="headingFive">
-      <h5 class="mb-0">
-        <button class="btn btn-info collapsed" data-toggle="collapse" data-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
-          View all responses for Question 5
-        </button>
-      </h5>
-    </div>
-    <div id="collapseFive" class="collapse" aria-labelledby="headingFive" data-parent="#accordion">
-      <div class="card-body abcde">
-        <% for(var i=0; i<responseArray.length; i++){ %>
-
-          <h5><%=responseArray[i].question5%></h5>
-        <% } %>
-      </div>
-    </div>
-  </div>
-
-
-
-<% for(var i=0; i<responseArray.length; i++){ %>
-
-    <%=responseArray[i].question1%>
-    <%=responseArray[i].question2%>
-    <%=responseArray[i].question3%>
-    <%=responseArray[i].question4%>
-    <%=responseArray[i].question5%>
-
-    <br><br>
-<% } %>
-
 <%}%>
+
+
+
+
 
 
 </div>

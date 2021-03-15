@@ -569,10 +569,14 @@ app.get('/viewresponses/:id', async(req,res)=>{
         //This id is username in Feedback Schema 
         const id = req.params.id;
         const form = await Feedback.findOne({_id:id});
-        console.log(form);
-        res.render('viewResponses', {user: form._id, responseArray : form.responses, form:form});
+        // console.log(form);
+        if(!form){
+            res.send("This form doesn't exist")
+        }else{
+            res.render('viewResponses', {user: form._id, questions:form.questions, form:form});
+        }
     }catch(err){
-        res.json(err);
+        res.send(err);
     }
 });
 
