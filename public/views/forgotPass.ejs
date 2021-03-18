@@ -8,65 +8,14 @@
         </a>
     </nav>
     
-    <!-- <div class="errors">
-        {{#if errors}}
-        {{#each errors}}
-            <div class="animated fadeOut message1">
-                {{msg}}            
-                <a href="#close" class="icon-remove"></a>
-            </div>
-        {{/each}}
-        {{/if}}
-
-        {{#if success_msg}}
-            <div class="animated fadeOut message1">
-                {{success_msg}}
-            </div>
-        {{/if}}
-
-        {{#if error_msg}}
-            <div class="animated fadeOut message1">
-                {{error_msg}}
-            </div>
-        {{/if}}
-
-        {{#if error}}
-            <div class="animated fadeOut message1">
-                {{error}}
-            </div>
-        {{/if}}
-    </div> -->
-
-
-    <div class = "errors">
-       
-
-        <% if(success_msg.length !=0 ){ %>
-            <div class="animated fadeOut message">
-                <% console.log(success_msg); %>
-                <%= success_msg %>
-            </div>
-        <% } %>
-
-        <% if(error_msg.length!=0){ %>
-            <div class="animated fadeOut message">
-                <%= error_msg[0] %>
-                <% console.log(error_msg); %>
-            </div>
-        <% } %>
-
-        <% if(error.length!=0){ %>
-            <div class="animated fadeOut message">
-                <%= error %>
-                <% console.log(error); %>
-            </div>
-        <% } %>
-
-    </div>
+  
+    <%- include ("partials/errors") %>
 
     <div class="forgotPassContainer">
         <form class="loginForm" action="/verifyForgotEmail" method="post">
-            <span class="forgotPassHeading">Forgot Password ?</span>
+            <span class="forgotPassHeading">Forgot Password ?</span> <br>
+            <h6 style = "color:white;" class = "abcde">Enter your email ID with which you have registered.</h6>
+            <h6 style = "color:white;" class = "abcde">We will send you a link to reset your password</h6>
 
             <div class="form-group forgotPassEmailForm">
                <label for="exampleInputEmail1" class="label">Email address</label>
@@ -76,4 +25,7 @@
         </form>
     </div>
 </div>
+
+<%- include ("partials/footer") %>
+
 

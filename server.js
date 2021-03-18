@@ -135,13 +135,15 @@ app.post('/preUserRegister',[
       .isEmail().withMessage('must be an email')
       .custom(value => {
           return Users.findByEmail(value).catch((err)=>{
-                throw new Error('this email is already in use');
+                throw new Error('This Email is already in use');
           });
     })    
   ],(req,res)=>{
     var body = _.pick(req.body,['password','email']);
     
     const errors = validationResult(req);
+    console.log(errors.mapped());
+    console.log(errors);
     if (!errors.isEmpty()) {
         res.render('register',{ 
             errors: errors.mapped() 
@@ -314,6 +316,7 @@ app.post('/verifyForgotEmail', [
     var body = _.pick(req.body,['email']);
 
     const errors = validationResult(req);
+    console.log(errors.mapped());
     if(!errors.isEmpty()) {
         res.render('forgotPass',{
             errors: errors.mapped()
@@ -500,7 +503,7 @@ app.post('/createnewform',[
     
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
-
+        console.log(errors.mapped());
         res.render('newForm',{ 
             errors: errors.mapped() 
         });

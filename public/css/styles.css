@@ -410,6 +410,17 @@ hr{
     -webkit-animation-delay: 5s;
 }
 
+.message3{
+    position: relative;
+    width: 35vw;
+    margin-left: 15vw;
+    padding: 15px 15px 15px 15px;
+    text-align: center; 
+    margin-top: 15px;
+    -moz-animation-delay: 5s;
+    -webkit-animation-delay: 5s;
+}
+
 .newFeedback{
     -moz-animation-delay: 5s;
     -webkit-animation-delay: 5s;
