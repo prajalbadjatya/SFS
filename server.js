@@ -16,7 +16,8 @@ const ejs = require('ejs');
 const dotenv = require('dotenv').config();
 
 const expressValidator = require('express-validator');
-const ensureAuth = require('./controller/authenticate.js')
+const ensureAuthT = require('./controller/teacherAuth.js')
+const ensureAuthS = require('./controller/studentAuth.js')
 
 
 const passport = require('passport');
@@ -25,6 +26,7 @@ const passportConf = require('./passport.js')
 //Bringing in the models
 var {Users} = require('./models/users.js');
 var {Feedback} = require('./models/feedback.js');
+const teacherAuth = require('./controller/teacherAuth.js');
 
 
 //Connect to DB
@@ -100,7 +102,7 @@ app.get('/login1', (req,res)=> {
 })
 
 
-app.get('/feedback',ensureAuth,async(req,res)=>{
+app.get('/feedback',ensureAuthS,async(req,res)=>{
     //console.log(req.user);
 
     const userDetails = req.user;
@@ -380,7 +382,7 @@ app.post('/logOut',(req,res)=>{
     res.redirect('/');
 });
 
-app.post('/feedback',ensureAuth,(req,res)=>{
+app.post('/feedback',ensureAuthS,(req,res)=>{
     console.log('hello');
     var body = _.pick(req.body,['email','username','rollno','branch','feedbacktype','feedback']);
     var feedback = new Feedback(body);
@@ -396,7 +398,7 @@ app.post('/feedback',ensureAuth,(req,res)=>{
      
  });
 
-app.get('/fill/:id',ensureAuth, async(req,res)=>{
+app.get('/fill/:id',ensureAuthS, async(req,res)=>{
     try{
         var id  = req.params.id;
         const form  = await Feedback.findOne({_id:id});
@@ -484,7 +486,7 @@ app.get('/adminFeedback', (req,res)=> {
 })
 
 
-app.get('/createnewform', ensureAuth, (req,res)=>{
+app.get('/createnewform', ensureAuthT, (req,res)=>{
     res.render("newForm");
 })
 
@@ -549,7 +551,7 @@ app.post('/createnewform',[
 
 
 //Route to view filled feedback forms
-app.get('/view',ensureAuth, async(req,res)=>{
+app.get('/view',teacherAuth, async(req,res)=>{
   
     const userDetails = req.user;
     console.log(userDetails);
@@ -566,7 +568,7 @@ app.get('/view',ensureAuth, async(req,res)=>{
 
 
 //Route to view responses of a feedback form with an id
-app.get('/viewresponses/:id',ensureAuth, async(req,res)=>{
+app.get('/viewresponses/:id',ensureAuthT, async(req,res)=>{
     
     try {
         //This id is username in Feedback Schema 
@@ -586,7 +588,7 @@ app.get('/viewresponses/:id',ensureAuth, async(req,res)=>{
 
 //Route to delete a feedback form
 //Now a get route later will change to delete while refactoring
-app.get('/deleteform/:id',ensureAuth, async(req,res)=>{
+app.get('/deleteform/:id',ensureAuthT, async(req,res)=>{
     try {
         const id = req.params.id;
         const form = await Feedback.findOne({_id:id});

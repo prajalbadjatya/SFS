@@ -607,3 +607,11 @@ hr{
     margin-right: 20%;
 }
 
+.largeModal{
+    max-width: 90%;
+    max-height: 100%;
+}
+
+.mediumModal{
+    max-width: 70%;
+}

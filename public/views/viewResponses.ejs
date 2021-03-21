@@ -1,4 +1,6 @@
 <%- include ("partials/header") %>
+
+
 <nav class="navbar navbar-light bg-light">
     <a class="navbar-brand navTop">
     <img src="/images/logo1.png" class="navLogo d-inline-block align-top" alt="">
@@ -7,7 +9,45 @@
     <div class="btn-group">
     <button type="submit" class="logoutBtn btn btn-outline-info">View Visual Representation</button>
     <button type="submit" class="logoutBtn btn btn-outline-primary">View Summary</button>
-    <button type="submit" class="logoutBtn btn btn-outline-primary">View All Responses</button>
+    <!-- <button type="submit" class="logoutBtn btn btn-outline-primary">View All Responses</button> -->
+
+
+  <!-- Button trigger modal -->
+  <button type="button" class="logoutBtn btn btn-outline-dark" data-toggle="modal" data-target="#exampleModalLong5">
+    View all Responses
+    </button>
+
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModalLong5" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+      <div class="modal-dialog largeModal" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLongTitle">All Responses</h5>
+            
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+            
+          </div>
+          
+          <div class="modal-body">
+
+            
+            <% for(var i=0; i<questions[0].question.responses.length ; i++){ %>
+              <% for(var j=0; j<questions.length; j++){ %>
+                  <h5 style="text-align: center;"><%=questions[j].question.responses[i].ans%></h5>
+              <% } %>
+              <br><br>
+            <% } %>   
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
     
 
     <!-- Button trigger modal -->
@@ -72,13 +112,13 @@
            
 
         <!-- Button trigger modal -->
-        <button type="button" class="btn btn btn-outline-primary" data-toggle="modal" data-target="#exampleModalLong">
+        <button type="button" class="btn btn btn-outline-primary" data-toggle="modal" data-target="#exampleModalLong<%=i%>">
           View all responses for this question
           </button>
   
           <!-- Modal -->
-          <div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
-            <div class="modal-dialog" role="document">
+          <div class="modal fade" id="exampleModalLong<%=i%>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+            <div class="modal-dialog mediumModal" role="document">
               <div class="modal-content">
                 <div class="modal-header">
                   <h5 class="modal-title" id="exampleModalLongTitle"><%=questions[i].question.text%></h5>
@@ -104,21 +144,9 @@
      </div>
       
     <% } %>
-
-    <% for(var i=0; i<questions[0].question.responses.length ; i++){ %>
-      <% for(var j=0; j<questions.length; j++){ %>
-          <h5><%=questions[j].question.responses[i].ans%></h5>
-      <% } %>
-    <% } %>
-
-
-    <br>
-    
-  <br>
 <%}%>
 </div>
 
 
 <%- include ("partials/footer") %>
-
 
