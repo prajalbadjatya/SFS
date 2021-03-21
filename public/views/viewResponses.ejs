@@ -5,6 +5,9 @@
     <span class="navbarTitle">Feedback System</span>
     </a>
     <div class="btn-group">
+    <button type="submit" class="logoutBtn btn btn-outline-info">View Visual Representation</button>
+    <button type="submit" class="logoutBtn btn btn-outline-primary">View Summary</button>
+    <button type="submit" class="logoutBtn btn btn-outline-primary">View All Responses</button>
     
 
     <!-- Button trigger modal -->
@@ -39,7 +42,6 @@
     </form>
   </div>
 </nav> 
-
     
 
 <div class = "abcde">
@@ -56,12 +58,6 @@
     <h6>Branch : <%=form.branch%></h6>
     <h6>Year : <%=form.year%></h6> 
     <h6>Created on <%=form.date%></h6> <br>
-
-
-    <button class="btn btn-success">View Summary and Visual Representation of responses</button>
-    <br><br>
-    <h6>View all the responses of a particular question by clicking on it</h6>
-
         
 
     <% for(var i=0; i<questions.length; i++){ %>
@@ -69,60 +65,45 @@
 
       <div class="jumbotron jumbotron-fluid">
         <div class="container">
-          <h1 class="lead">Fluid jumbotron</h1>
-          <p class="lead">This is a modified jumbotron that occupies the entire horizontal space of its parent.</p>
+          <h3><%=questions[i].question.text%></h3>
           <hr class="my-4">
-          <p>It uses utility classes for typography and spacing to space content out within the larger container.</p>
-          <p class="lead">
-            <a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a>
-          </p>
-        </div>
-      </div>
-      
-        <!-- Button trigger modal -->
-        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalLong">
-        <%=questions[i].question.text%>
-        </button>
+          <div class="btn-group">
+            <button type="submit" class="logoutBtn btn btn-outline-info btn">View summary of all responses for this question</button>
+           
 
-        <!-- Modal -->
-        <div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
-          <div class="modal-dialog" role="document">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLongTitle"><%=questions[i].question.text%></h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                  <span aria-hidden="true">&times;</span>
-                </button>
-              </div>
-              <div class="modal-body">
-              <% for(var j=0; j<questions[i].question.responses.length; j++){ %>
-                    <h5><%=questions[i].question.responses[j].ans%></h5>
-                    <br>
-              <% }  %>
-              </div>
-              <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <!-- Button trigger modal -->
+        <button type="button" class="btn btn btn-outline-primary" data-toggle="modal" data-target="#exampleModalLong">
+          View all responses for this question
+          </button>
+  
+          <!-- Modal -->
+          <div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLongTitle"><%=questions[i].question.text%></h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                <% for(var j=0; j<questions[i].question.responses.length; j++){ %>
+                      <h5><%=questions[i].question.responses[j].ans%></h5>
+                      <br>
+                <% }  %>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
               </div>
             </div>
           </div>
         </div>
-<br><br>
+          
+        </div>
+     </div>
+      
     <% } %>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
     <% for(var i=0; i<questions[0].question.responses.length ; i++){ %>
       <% for(var j=0; j<questions.length; j++){ %>
@@ -135,14 +116,7 @@
     
   <br>
 <%}%>
-
-
-
-
-
-
 </div>
-
 
 
 <%- include ("partials/footer") %>
