@@ -26,7 +26,6 @@ const passportConf = require('./passport.js')
 //Bringing in the models
 var {Users} = require('./models/users.js');
 var {Feedback} = require('./models/feedback.js');
-const teacherAuth = require('./controller/teacherAuth.js');
 
 
 //Connect to DB
@@ -551,7 +550,7 @@ app.post('/createnewform',[
 
 
 //Route to view filled feedback forms
-app.get('/view',teacherAuth, async(req,res)=>{
+app.get('/view',ensureAuthT, async(req,res)=>{
   
     const userDetails = req.user;
     console.log(userDetails);
