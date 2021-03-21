@@ -396,7 +396,7 @@ app.post('/feedback',ensureAuth,(req,res)=>{
      
  });
 
-app.get('/fill/:id',async(req,res)=>{
+app.get('/fill/:id',ensureAuth, async(req,res)=>{
     try{
         var id  = req.params.id;
         const form  = await Feedback.findOne({_id:id});
@@ -484,7 +484,7 @@ app.get('/adminFeedback', (req,res)=> {
 })
 
 
-app.get('/createnewform', (req,res)=>{
+app.get('/createnewform', ensureAuth, (req,res)=>{
     res.render("newForm");
 })
 
@@ -549,7 +549,7 @@ app.post('/createnewform',[
 
 
 //Route to view filled feedback forms
-app.get('/view',async(req,res)=>{
+app.get('/view',ensureAuth, async(req,res)=>{
   
     const userDetails = req.user;
     console.log(userDetails);
@@ -566,7 +566,7 @@ app.get('/view',async(req,res)=>{
 
 
 //Route to view responses of a feedback form with an id
-app.get('/viewresponses/:id', async(req,res)=>{
+app.get('/viewresponses/:id',ensureAuth, async(req,res)=>{
     
     try {
         //This id is username in Feedback Schema 
@@ -586,7 +586,7 @@ app.get('/viewresponses/:id', async(req,res)=>{
 
 //Route to delete a feedback form
 //Now a get route later will change to delete while refactoring
-app.get('/deleteform/:id', async(req,res)=>{
+app.get('/deleteform/:id',ensureAuth, async(req,res)=>{
     try {
         const id = req.params.id;
         const form = await Feedback.findOne({_id:id});
@@ -594,6 +594,7 @@ app.get('/deleteform/:id', async(req,res)=>{
             return res.status(400).json({
                 msg: "Feedback form don't exist"
             })
+            // res.redirect('/view');
         }
         console.log('deleted');
         form.remove();

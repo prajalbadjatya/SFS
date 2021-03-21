@@ -1,31 +1,34 @@
 <%- include ("partials/header") %>
 
-<div class="mainContainer2">
-    <nav class="navbar navbar-light bg-light loginNavbar">
-        <a class="navbar-brand navTop">
-            <img src="images/logo1.png" class="navLogo d-inline-block align-top" alt="">
-            <span class="navbarTitle">Feedback System</span>
-        </a>
+<div class="mainContainer1">
+    <nav class="navbar navbar-light bg-light">
+       <a class="navbar-brand navTop">
+       <img src="images/logo1.png" class="navLogo d-inline-block align-top" alt="">
+       <span class="navbarTitle">Feedback System</span>
+       </a>
     </nav>
-    
-    <%- include ("partials/errors") %>
 
-    <div class="loginContainer">
-        <form action="/preUserRegister" method="post">
-            <span class="loginHeading">Student Feedback System Register</span>
-            
-            <div class="registerDiv">
-                <div class="form-group emailForm">
-                   <label for="exampleInputEmail1" class="label">Email address</label>
-                   <input type="email" class="form-control" id="exampleInputEmail1" name="email" aria-describedby="emailHelp" placeholder="Enter email">
+
+    <div class="mainContainer2">
+        <%- include ("partials/errors") %>
+
+        <div class="loginContainer">
+            <form action="/preUserRegister" method="post">
+                <span class="loginHeading">Student Feedback System Register</span>
+                
+                <div class="registerDiv">
+                    <div class="form-group emailForm">
+                    <label for="exampleInputEmail1" class="label">Email address</label>
+                    <input type="email" class="form-control" id="exampleInputEmail1" name="email" aria-describedby="emailHelp" placeholder="Enter email">
+                    </div>
+                    <div class="form-group">
+                    <label for="exampleInputPassword1" class="label">Password</label>
+                    <input type="password" class="form-control" id="exampleInputPassword1" name="password" placeholder="Password">
+                    </div>
+                    <button type="submit" id="SubmitBtn" class="btn btn-primary">Submit</button>
                 </div>
-                <div class="form-group">
-                   <label for="exampleInputPassword1" class="label">Password</label>
-                   <input type="password" class="form-control" id="exampleInputPassword1" name="password" placeholder="Password">
-                </div>
-                <button type="submit" id="SubmitBtn" class="btn btn-primary">Submit</button>
-            </div>
-        </form>
+            </form>
+        </div>
     </div>
 </div>
 <%- include ("partials/footer") %>

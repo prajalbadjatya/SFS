@@ -2,26 +2,8 @@
 <%- include ("partials/navbar") %>
 
 <div class="mainContainer2">
-    <div class = "errors">
-      <% if(success_msg.length !=0 ){ %>
-          <div class="animated fadeOut message">
-              <% console.log(success_msg); %>
-              <%= success_msg %>
-          </div>
-      <% } %>
-      <% if(error_msg.length!=0){ %>
-          <div class="animated fadeOut message">
-              <%= error_msg[0] %>
-              <% console.log(error_msg); %>
-          </div>
-      <% } %>
-      <% if(error.length!=0){ %>
-          <div class="animated fadeOut message">
-              <%= error %>
-              <% console.log(error); %>
-          </div>
-      <% } %>
-    </div>
+  <%- include ("partials/errors") %>
+
 
     <div class="loginContainer2">
 
