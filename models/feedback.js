@@ -45,6 +45,9 @@ var FeedbackSchema = new mongoose.Schema({
                     },
                     ans:{
                         type: String
+                    },
+                    star: {
+                        type: String
                     }
                 }
 

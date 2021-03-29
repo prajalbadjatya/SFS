@@ -188,13 +188,13 @@ app.post('/postUserRegister',[
 
     
     check('branch')
-      .isLength({min: 3}).withMessage('Min length for branch is 3')
+      .isLength({min: 2}).withMessage('Min length for branch is 3')
       .exists()
       .isString().withMessage('Branch must be a String'),
     
     check('rollno')
       .isInt().withMessage('RollNo must be an Integer')
-      .isLength({min: 10}).withMessage('RollNo must be 10 digits long')
+      .isLength({min: 5}).withMessage('RollNo must be 10 digits long')
       .custom(value => {
         return Users.findByRollno(value).catch((err)=>{
                 throw new Error('An Account is already linked with this Rollno');
@@ -423,25 +423,34 @@ app.post('/fill/:id', async(req,res)=> {
         
         // console.log(form);
         var noOfquestions = form.questions.length;
+        console.log(req.body.star0);
+        console.log(req.body.star1);
 
         for(var i=0; i<noOfquestions; i++)
         {
             var ans;
+            var star;
             if(i==0){
                 ans = req.body.question1;
+                star = req.body.star1;
             }else if(i==1){
                 ans = req.body.question2;
+                star = req.body.star2;
             }else if(i==2){
                 ans = req.body.question3;
+                star = req.body.star3;
             }else if(i==3){
                 ans = req.body.question4;
+                star = req.body.star4;
             }else{
                 ans = req.body.question5;
+                star = req.body.star5;
             }
             // console.log(ans);
             form.questions[i].question.responses.unshift({
                 rollno,
-                ans
+                ans,
+                star
             })
             
         }
