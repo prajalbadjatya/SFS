@@ -566,7 +566,7 @@ app.get('/view',ensureAuthT, async(req,res)=>{
     const id = userDetails._id;
     try{
         const form = await Feedback.find({username: id});
-        console.log(form);
+        // console.log(form);
         res.render('viewFilled',{feedbackforms:form, user: userDetails} ); 
     }catch(err){
         res.json(err);
@@ -615,10 +615,27 @@ app.get('/deleteform/:id',ensureAuthT, async(req,res)=>{
     }
 })
 
-app.get('/getsummary/:id/:qno', ensureAuthT, (req,res)=>{
+app.get('/getsummary/:id/:qno', ensureAuthT, async(req,res)=>{
 
     const formId = req.params.id;
     const qNo = req.params.qno;
+
+    const form = await Feedback.findOne({_id:formId})
+    if(!form){
+        return res.status(400).json({
+            msg: "Feedback form don't exist"
+        })
+    }
+
+
+    //Combining all responses to get the summary
+    var allResponses = "";
+    const ResponseArray = form.questions[qNo-1].question.responses;
+    for(var i=0; i<ResponseArray.length; i++){
+        allResponses += ResponseArray[i].ans;
+    }
+
+    //console.log(allResponses);
 
     const sum = "This is the generated Summary"
     
