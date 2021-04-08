@@ -1,0 +1,26 @@
+<%- include ("partials/header") %>
+
+<div class="mainContainer1">
+    <nav class="navbar navbar-light bg-light">
+       <a class="navbar-brand navTop">
+       <img src="/images/logo1.png" class="navLogo d-inline-block align-top" alt="">
+       <span class="navbarTitle">Feedback System</span>
+       </a>
+       <form action="/logOut" method="post">
+           <button type="submit" class="logoutBtn btn btn-outline-success">Logout</button>
+       </form>
+    </nav>
+
+<br>
+
+<div class="jumbotron jumbotron-fluid">
+    <div class="container">
+      <h1 class="display-4" style = "text-align: center;">Summary for Question <%=q%></h1>
+      <br>
+      <p class="lead" style="text-align: center;"><%=summary%></p>
+    </div>
+</div>
+
+
+<%- include ("partials/footer") %>
+

@@ -615,6 +615,17 @@ app.get('/deleteform/:id',ensureAuthT, async(req,res)=>{
     }
 })
 
+app.get('/getsummary/:id/:qno', ensureAuthT, (req,res)=>{
+
+    const formId = req.params.id;
+    const qNo = req.params.qno;
+
+    const sum = "This is the generated Summary"
+    
+    res.render('Summary', {summary: sum, q:qNo});
+
+})
+
 
 server.listen(port, ()=> {
     console.log(`Server is up on PORT ${port}`);
