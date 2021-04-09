@@ -643,6 +643,75 @@ app.get('/getsummary/:id/:qno', ensureAuthT, async(req,res)=>{
 
 })
 
+app.get('/visualRepresentation/:id', async(req,res)=>{
+    
+    const formId = req.params.id;
+
+    const form = await Feedback.findOne({_id:formId})
+    if(!form){
+        return res.status(400).json({
+            msg: "Feedback form don't exist"
+        })
+    }
+
+    
+    const noOfquestions = form.questions.length;
+    var sentiment = [];
+    
+    for(var i=0; i<noOfquestions; i++){
+        //For each question count positive, negative and neutral sentiments
+        var positive=0, negative=0, neutral=0;
+        //Get all responses for the question
+        const responsesForQ = form.questions[i].question.responses;
+        // console.log(responsesForQ);
+
+        for(var j=0; j<responsesForQ.length; j++)
+        {
+            if(responsesForQ[j].star<=2){
+                negative++;
+            }
+            else if(responsesForQ[j].star==3){
+                neutral++;
+            }else{
+                positive++;
+            }
+        }
+
+        
+
+        const questionText = form.questions[i].question.text;
+
+        const totalResponses = responsesForQ.length;
+        const positivePercentage = (positive/totalResponses)*100;
+        const negativePercentage = (negative/totalResponses)*100;
+        const neutralPercentage = 100-positivePercentage-negativePercentage;
+
+        
+
+        sentiment.push({
+            questionText,positivePercentage, negativePercentage, neutralPercentage
+        })
+    }
+
+    if(sentiment.length<5){
+        const questionText="nothing";
+        const positivePercentage = 0;
+        const negativePercentage = 0;
+        const neutralPercentage = 0;
+
+
+        for(var i=0;i<5-sentiment.length;i++){
+            sentiment.push(questionText,positivePercentage,negativePercentage,neutralPercentage);
+        }
+    }
+
+
+
+    // console.log(sentiment);
+    
+    res.render('VisualRep', {no:noOfquestions, sentiment:sentiment});
+})
+
 
 server.listen(port, ()=> {
     console.log(`Server is up on PORT ${port}`);

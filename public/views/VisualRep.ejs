@@ -1,0 +1,112 @@
+<%- include ("partials/header") %>
+<div class="mainContainer1">
+    <nav class="navbar navbar-light bg-light">
+       <a class="navbar-brand navTop">
+       <img src="/images/logo1.png" class="navLogo d-inline-block align-top" alt="">
+       <span class="navbarTitle">Feedback System</span>
+       </a>
+       <form action="/logOut" method="post">
+           <button type="submit" class="logoutBtn btn btn-outline-success">Logout</button>
+       </form>
+    </nav>
+
+    <br>
+    <h1 style = "text-align: center;">Visual Representation</h1> <br><br>
+    
+     <% var noOfquestions = no %>
+     
+    <% for(var i=0; i<noOfquestions; i++){ %>
+         <div id="chartContainer<%=i+1%>" style="height: 370px; width: 100%;"></div>
+    <%} %>
+    
+
+<script>
+window.onload = function() {
+
+    var chart = new CanvasJS.Chart("chartContainer1", {
+	animationEnabled: true,
+	title: {
+		text: "<%=sentiment[0].questionText%>"
+	},
+	data: [{
+		type: "pie",
+		startAngle: 240,
+		yValueFormatString: "##0.00\"%\"",
+		indexLabel: "{label} {y}",
+		dataPoints: [
+			{y: <%=sentiment[0].positivePercentage%>, label: "Positive", color:"green"},
+			{y: <%=sentiment[0].negativePercentage%>, label: "Negative",color:"red"},
+            {y: <%=sentiment[0].neutralPercentage%>, label: "Neutral",color:"grey"},
+		]
+	    }]
+    });
+    chart.render();
+    
+
+    var chart2 = new CanvasJS.Chart("chartContainer2", {
+	animationEnabled: true,
+	title: {
+		text: "<%=sentiment[1].questionText%>"
+	},
+	data: [{
+		type: "pie",
+		startAngle: 240,
+		yValueFormatString: "##0.00\"%\"",
+		indexLabel: "{label} {y}",
+		dataPoints: [
+            {y: <%=sentiment[1].positivePercentage%>, label: "Positive", color:"green"},
+			{y: <%=sentiment[1].negativePercentage%>, label: "Negative",color:"red"},
+            {y: <%=sentiment[1].neutralPercentage%>, label: "Neutral",color:"grey"}, 
+		]
+	    }]
+    });
+    chart2.render();
+
+    var chart3 = new CanvasJS.Chart("chartContainer3", {
+	animationEnabled: true,
+	title: {
+		text: "<%=sentiment[2].questionText%>"
+	},
+	data: [{
+		type: "pie",
+		startAngle: 240,
+		yValueFormatString: "##0.00\"%\"",
+		indexLabel: "{label} {y}",
+		dataPoints: [
+            {y: <%=sentiment[2].positivePercentage%>, label: "Positive", color:"green"},
+			{y: <%=sentiment[2].negativePercentage%>, label: "Negative",color:"red"},
+            {y: <%=sentiment[2].neutralPercentage%>, label: "Neutral",color:"grey"},
+		]
+	    }]
+    });
+    chart3.render();
+
+    var chart4 = new CanvasJS.Chart("chartContainer4", {
+	animationEnabled: true,
+	title: {
+		text: "<%=sentiment[3].questionText%>"
+	},
+	data: [{
+		type: "pie",
+		startAngle: 240,
+		yValueFormatString: "##0.00\"%\"",
+		indexLabel: "{label} {y}",
+		dataPoints: [
+            {y: <%=sentiment[3].positivePercentage%>, label: "Positive", color:"green"},
+			{y: <%=sentiment[3].negativePercentage%>, label: "Negative",color:"red"},
+            {y: <%=sentiment[3].neutralPercentage%>, label: "Neutral",color:"grey"},
+		]
+	    }]
+    });
+    chart4.render();
+
+
+    
+  
+
+}
+</script>
+<script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+
+
+<%- include ("partials/footer") %>
