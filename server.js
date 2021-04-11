@@ -658,7 +658,7 @@ app.get('/getsummary/:id/:qno', ensureAuthT, async(req,res)=>{
     
 
 
-app.get('/visualRepresentation/:id', async(req,res)=>{
+app.get('/visualRepresentation/:id',ensureAuthT, async(req,res)=>{
     
     const formId = req.params.id;
 
@@ -726,7 +726,7 @@ app.get('/visualRepresentation/:id', async(req,res)=>{
 
     console.log(sentiment);
     
-    res.render('VisualRep', {no:noOfquestions, sentiment:sentiment});
+    res.render('VisualRep', {no:noOfquestions, sentiment:sentiment, form:form});
 })
 
 

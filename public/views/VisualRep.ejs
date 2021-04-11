@@ -1,13 +1,14 @@
 <%- include ("partials/header") %>
-<div class="mainContainer1">
+
     <nav class="navbar navbar-light bg-light">
        <a class="navbar-brand navTop">
        <img src="/images/logo1.png" class="navLogo d-inline-block align-top" alt="">
        <span class="navbarTitle">Feedback System</span>
        </a>
-       <form action="/logOut" method="post">
-           <button type="submit" class="logoutBtn btn btn-outline-success">Logout</button>
-       </form>
+
+	   <form action="/logOut" method="post">
+		<button type="submit" class="logoutBtn btn btn-outline-success">Logout</button>
+	   </form>
     </nav>
 
     <br>
@@ -18,8 +19,104 @@
      
     <% for(var i=0; i<noOfquestions; i++){ %>
          <div id="chartContainer<%=i+1%>" style="height: 370px; width: 100%;"></div>
+		 <div class="btn-group" style = "margin-left: 25%; margin-right: 25%;">
+
+			<button type="button" class="btn logoutBtn btn-outline-success" data-toggle="modal" data-target="#exampleModalLong<%=i%>">
+				View Positive Responses
+			</button>
+			<!-- Modal -->
+			<div class="modal fade" id="exampleModalLong<%=i%>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+				<div class="modal-dialog mediumModal" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLongTitle"><%=form.questions[i].question.text%></h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+					</div>
+					<div class="modal-body">
+						<% var ResponseArray = form.questions[i].question.responses %>
+						<h4 style = "color: green; text-align: center;"><%=sentiment[i].positivePercentage%> % have responded positively</h4> <br>
+						<%  for(var j=0; j<ResponseArray.length; j++){ %>
+								<% if(ResponseArray[j].star>=4){ %>
+								   <h5 style="text-align: center;"><%=ResponseArray[j].ans%></h5>
+								<% } %>
+						<% } %>
+					</div>
+					<div class="modal-footer">
+					<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+					</div>
+				</div>
+				</div>
+			</div>
+
+
+
+			<button type="button" class="btn logoutBtn btn-outline-danger" data-toggle="modal" data-target="#exampleModalLongi<%=i%>">
+				View Negative Responses
+			</button>
+			<!-- Modal -->
+			<div class="modal fade" id="exampleModalLongi<%=i%>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+				<div class="modal-dialog mediumModal" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLongTitle"><%=form.questions[i].question.text%></h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+					</div>
+					<div class="modal-body">
+						<h4 style = "color: red; text-align: center;"><%=sentiment[i].negativePercentage%> % have responded negatively</h4> <br>
+						<% var ResponseArray = form.questions[i].question.responses %>
+						<%  for(var j=0; j<ResponseArray.length; j++){ %>
+								<% if(ResponseArray[j].star<=2){ %>
+								   <h5 style="text-align: center;"><%=ResponseArray[j].ans%></h5>
+								<% } %>
+						<% } %>
+					</div>
+					<div class="modal-footer">
+					<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+					</div>
+				</div>
+				</div>
+			</div>
+
+
+
+
+			<button type="button" class="btn logoutBtn btn-outline-info" data-toggle="modal" data-target="#exampleModalLongii<%=i%>">
+				View Neutral Responses
+			</button>
+			<!-- Modal -->
+			<div class="modal fade" id="exampleModalLongii<%=i%>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+				<div class="modal-dialog mediumModal" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLongTitle"><%=form.questions[i].question.text%></h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+					</div>
+					<div class="modal-body">
+						<h4 style = "color: deepskyblue; text-align: center;"><%=sentiment[i].neutralPercentage%> % have neutral opinion</h4> <br>
+						<% var ResponseArray = form.questions[i].question.responses %>
+						<%  for(var j=0; j<ResponseArray.length; j++){ %>
+								<% if(ResponseArray[j].star==3){ %>
+								   <h5 style="text-align: center;"><%=ResponseArray[j].ans%></h5>
+								<% } %>
+						<% } %>
+					</div>
+					<div class="modal-footer">
+					<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+					</div>
+				</div>
+				</div>
+			</div>
+
+		 </div>
+		   <br><br><br>
+
     <%} %>
-    
 
 <script>
 window.onload = function() {
@@ -100,11 +197,6 @@ window.onload = function() {
 	    }]
     });
     chart4.render();
-
-
-    
-  
-
 }
 </script>
 <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
