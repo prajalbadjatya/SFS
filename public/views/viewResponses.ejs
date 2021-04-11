@@ -110,7 +110,7 @@
           <hr class="my-4">
           <div class="btn-group">
             <a href="/getsummary/<%=form._id%>/<%=i+1%>">
-            <button type="submit" class="logoutBtn btn btn-outline-info btn">View summary of all responses for this question</button>
+            <button onclick = "fun()" type="submit" class="logoutBtn btn btn-outline-info btn">View summary of all responses for this question</button>
             </a>
            
 
@@ -153,6 +153,12 @@
     <% } %>
 <%}%>
 </div>
+
+<script>
+  function fun(){
+    alert("Creating the summary of all responses might take upto 20 seconds. Click OK to continue");
+  }
+</script>
 
 
 <%- include ("partials/footer") %>

@@ -75,12 +75,13 @@ scores = nx.pagerank(nx_graph)
 ranked_sentences = sorted(((scores[i],s) for i,s in enumerate(sentences)), reverse=True)
 
 summary=""
-for i in range(5):
-    summary=summary+" "+(ranked_sentences[i][1])
+for i in range(8):
+    summary=summary + (ranked_sentences[i][1])+ " "
     
 #summary = [s.strip() for s in summary]
 
 output = {
     "summ": summary 
 }
+# print(summary)
 print(json.dumps(output))
