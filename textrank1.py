@@ -46,14 +46,26 @@ lemmatizer=nltk.stem.WordNetLemmatizer()
 for s in clean_sentences:
     lemmatizer.lemmatize(s)
         
-word_embeddings = {}
-f = open('dataset.txt', encoding='utf-8')
-for line in f:
-    values = line.split()
-    word = values[0]
-    coefs = np.asarray(values[1:], dtype='float32')
-    word_embeddings[word] = coefs
-f.close()
+# word_embeddings = {}
+# f = open('dataset.txt', encoding='utf-8')
+# for line in f:
+#     values = line.split()
+#     word = values[0]
+#     coefs = np.asarray(values[1:], dtype='float32')
+#     word_embeddings[word] = coefs
+# f.close()
+
+import pickle
+# try:
+#     dictionary = open('word_embeddings', 'ab')
+#     # source, destination
+#     pickle.dump(word_embeddings,dictionary)                     
+#     dictionary.close()
+# except:
+#     print("Something went wrong")
+
+dictionary = open('word_embeddings', 'rb')     
+word_embeddings = pickle.load(dictionary)
 
 sentence_vectors = []
 for i in clean_sentences:
@@ -75,7 +87,7 @@ scores = nx.pagerank(nx_graph)
 ranked_sentences = sorted(((scores[i],s) for i,s in enumerate(sentences)), reverse=True)
 
 summary=""
-for i in range(8):
+for i in range(7):
     summary=summary + (ranked_sentences[i][1])+ " "
     
 #summary = [s.strip() for s in summary]
