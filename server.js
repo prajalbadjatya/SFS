@@ -106,11 +106,37 @@ app.get('/feedback',ensureAuthS,async(req,res)=>{
     //console.log(req.user);
 
     const userDetails = req.user;
-    // console.log(userDetails);
+    //console.log(userDetails);
     try{
         const form = await Feedback.find({branch:userDetails.branch, year: userDetails.year});
+        const rollNo = userDetails.rollno;
+
+        // console.log(form[0].questions[0].question.responses);
+
+        var formArray = [];
+        for(var i=0; i<form.length;i++)
+        {
+            const responseArray = form[i].questions[0].question.responses;
+            var flag = 0;
+            for(var j=0; j<responseArray.length; j++)
+            {
+                if(responseArray[j].rollno == rollNo)
+                {
+                    flag = 1;
+                    break;
+                }
+            }
+            if(flag == 0)
+            {
+                formArray.push(form[i]);
+            }
+        }
+        
         console.log(form);
-        res.render('feedback',{feedbackforms:form, user: userDetails} ); 
+        console.log(formArray);
+
+
+        res.render('feedback',{feedbackforms:formArray, user: userDetails} ); 
     }catch(err){
         res.json(err);
     }
@@ -721,8 +747,6 @@ app.get('/visualRepresentation/:id',ensureAuthT, async(req,res)=>{
             sentiment.push({questionText,positivePercentage,negativePercentage,neutralPercentage});
         }
     }
-
-
 
     console.log(sentiment);
     

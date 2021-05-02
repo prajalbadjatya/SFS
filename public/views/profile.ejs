@@ -45,18 +45,36 @@
                <label for="exampleInputEmail1" class="label">Email address</label>
                <input type="email" class="form-control" id="exampleInputEmail1" name="email" value="<%=email%>" aria-describedby="emailHelp" placeholder="Enter email" readonly>
             </div>
+            
+
             <div class="form-group">
-               <label for="exampleInputUsername" class="label">Year</label>
-               <input type="text" class="form-control" id="exampleInputUsername" name="username" placeholder="Enter Year of study">
+                <label for="exampleInputPassword1" class="label">Year</label>
+                <select class="form-select form-control" aria-label="Default select example" name = "username">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                </select>
             </div>
+
             <div class="form-group">
                <label for="exampleInputRollno" class="label">Roll No.</label>
                <input type="text" class="form-control" id="exampleInputRollno" name="rollno" placeholder="Enter Roll No.">
             </div>
+
+
             <div class="form-group">
-               <label for="exampleInputBranch" class="label">Branch</label>
-               <input type="text" class="form-control" id="exampleInputBranch" name="branch" placeholder="Enter Branch">
-            </div>
+                <label for="exampleInputEmail1" class="label">Branch</label>
+                <!-- <input type="text" class="form-control" id="exampleInputEmail1" name="branch" aria-describedby="emailHelp" placeholder="Enter branch"> -->
+                <select class="form-select form-control" aria-label="Default select example" name = "branch">
+                    <option value="CSE">CSE</option>
+                    <option value="EI">EI</option>
+                    <option value="EC">EC</option>
+                    <option value="CE">CE</option>
+                    <option value="ME">ME</option>
+                </select>
+                </div>
+                
             <button type="submit" id="SubmitBtn" class="btn btn-primary">Submit</button>
         </form>
     </div>

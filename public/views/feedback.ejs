@@ -50,7 +50,7 @@
             <% var len = feedbackforms.length %>
               <h5>There are total <%=len%> feedback forms available to fill</h5>
             <% for(var i=0; i<feedbackforms.length; i++){ %>
-              <a href="/fill/<%=feedbackforms[i]._id%>"> <button type="submit" id="SubmitBtn2" class="btn btn-info">Feedback Form <%=i+1%> <br> <h5>Created by <%=feedbackforms[i].username%></h5></button> </a> <br>
+              <a href="/fill/<%=feedbackforms[i]._id%>"> <button type="submit" id="SubmitBtn2" class="btn btn-info">Feedback Form <%=i+1%> <br> <h5>Created by <%=feedbackforms[i].username%></h5></button> </a> <br><br>
               
             <% } %>
             <% }else{ %>
