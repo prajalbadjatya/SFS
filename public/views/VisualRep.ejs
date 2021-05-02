@@ -197,6 +197,28 @@ window.onload = function() {
 	    }]
     });
     chart4.render();
+
+	var chart5 = new CanvasJS.Chart("chartContainer5", {
+	animationEnabled: true,
+	title: {
+		text: "<%=sentiment[4].questionText%>"
+	},
+	data: [{
+		type: "pie",
+		startAngle: 240,
+		yValueFormatString: "##0.00\"%\"",
+		indexLabel: "{label} {y}",
+		dataPoints: [
+            {y: <%=sentiment[4].positivePercentage%>, label: "Positive", color:"green"},
+			{y: <%=sentiment[4].negativePercentage%>, label: "Negative",color:"red"},
+            {y: <%=sentiment[4].neutralPercentage%>, label: "Neutral",color:"grey"},
+		]
+	    }]
+    });
+    chart5.render();
+
+
+
 }
 </script>
 <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>

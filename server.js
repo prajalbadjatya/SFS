@@ -736,19 +736,22 @@ app.get('/visualRepresentation/:id',ensureAuthT, async(req,res)=>{
         })
     }
 
-    if(sentiment.length<5){
+    console.log(sentiment);
+
+    if(noOfquestions<5){
         const questionText="nothing";
         const positivePercentage = 0;
         const negativePercentage = 0;
         const neutralPercentage = 0;
 
 
-        for(var i=0;i<5-sentiment.length;i++){
+        for(var i=0;i<5-noOfquestions;i++){
+            console.log("Hello");
             sentiment.push({questionText,positivePercentage,negativePercentage,neutralPercentage});
         }
     }
 
-    console.log(sentiment);
+    
     
     res.render('VisualRep', {no:noOfquestions, sentiment:sentiment, form:form});
 })
